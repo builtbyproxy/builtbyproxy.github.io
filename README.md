@@ -4,7 +4,7 @@ My personal portfolio site — a digital garden showcasing side projects.
 
 **[View Live Site](https://lachlanyoung.dev)**
 
-![Site Preview](preview.png)
+![Site Preview](public/og-image.png)
 
 ## Tech Stack
 
