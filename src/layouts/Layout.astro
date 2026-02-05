@@ -1,0 +1,168 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = "BuiltByProxy | My Digital Garden" } = Astro.props;
+---
+
+<html lang="en" data-theme="garden">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A garden of side projects by BuiltByProxy" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <!-- Plausible Analytics -->
+    <script async src="https://plausible.io/js/pa-bO1OvixrQBZuW1VBYuFCQ.js"></script>
+    <script is:inline>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <!-- Theme init: runs before paint to prevent flash -->
+    <script is:inline>
+    (function() {
+      var themes = {
+        sunrise: {skyTop:'#f5d5c8',skyBottom:'#f7ebe0',cloudOpacity:'0.9',hillFar:'#a89a7c',hillMid:'#9d9470',grass:'#8a9668',text:'#302018',textMuted:'#5a4a40',textAccent:'#3a6a30',surfaceBg:'rgba(250,245,238,0.75)',surfaceBgSolid:'rgba(250,245,238,0.88)',surfaceBorder:'rgba(180,170,155,0.25)',overlay:'0',bodyBg:'#f7ebe0'},
+        day: {skyTop:'#e8e4dc',skyBottom:'#f0ede8',cloudOpacity:'0.9',hillFar:'#8a9a7c',hillMid:'#7d9470',grass:'#7a9668',text:'#302820',textMuted:'#5a524a',textAccent:'#3a6a30',surfaceBg:'rgba(250,247,240,0.75)',surfaceBgSolid:'rgba(250,247,240,0.88)',surfaceBorder:'rgba(180,170,155,0.25)',overlay:'0',bodyBg:'#f0ede8'},
+        'golden-hour': {skyTop:'#e8c8a0',skyBottom:'#f0e0c8',cloudOpacity:'0.85',hillFar:'#9a8a6c',hillMid:'#8d8460',grass:'#7a8658',text:'#302015',textMuted:'#5a4a38',textAccent:'#3a6a30',surfaceBg:'rgba(248,240,228,0.75)',surfaceBgSolid:'rgba(248,240,228,0.88)',surfaceBorder:'rgba(180,170,145,0.25)',overlay:'0',bodyBg:'#f0e0c8'},
+        night: {skyTop:'#1e2a4a',skyBottom:'#2a3a5a',cloudOpacity:'0.15',hillFar:'#3a4a5c',hillMid:'#2d3d50',grass:'#2a3a3e',text:'#e8e4de',textMuted:'#b8b4b0',textAccent:'#90c8a8',surfaceBg:'rgba(25,35,55,0.8)',surfaceBgSolid:'rgba(25,35,55,0.92)',surfaceBorder:'rgba(80,100,130,0.35)',overlay:'1',bodyBg:'#1e2a3a'}
+      };
+      function getTimeTheme() {
+        var h = new Date().getHours();
+        if (h >= 6 && h < 9) return 'sunrise';
+        if (h >= 9 && h < 17) return 'day';
+        if (h >= 17 && h < 20) return 'golden-hour';
+        return 'night';
+      }
+      var stored = sessionStorage.getItem('garden-theme');
+      var theme = (stored && themes[stored]) ? stored : getTimeTheme();
+      function applyTheme(name) {
+        var t = themes[name];
+        if (!t) return;
+        document.documentElement.setAttribute('data-time', name);
+        var r = document.documentElement.style;
+        r.setProperty('--sky-color-top', t.skyTop);
+        r.setProperty('--sky-color-bottom', t.skyBottom);
+        r.setProperty('--cloud-opacity', t.cloudOpacity);
+        r.setProperty('--hill-far-color', t.hillFar);
+        r.setProperty('--hill-mid-color', t.hillMid);
+        r.setProperty('--grass-color', t.grass);
+        r.setProperty('--text-color', t.text);
+        r.setProperty('--text-muted', t.textMuted);
+        r.setProperty('--text-accent', t.textAccent);
+        r.setProperty('--surface-bg', t.surfaceBg);
+        r.setProperty('--surface-bg-solid', t.surfaceBgSolid);
+        r.setProperty('--surface-border', t.surfaceBorder);
+        r.setProperty('--overlay-opacity', t.overlay);
+        r.setProperty('--body-bg', t.bodyBg);
+        window.__gardenTheme = name;
+      }
+      window.__gardenThemes = themes;
+      window.__applyTheme = applyTheme;
+      applyTheme(theme);
+    })();
+    </script>
+  </head>
+  <body class="min-h-screen relative overflow-x-hidden" style="background-color: var(--body-bg);">
+    <!-- Paper texture overlay -->
+    <div class="fixed inset-0 pointer-events-none z-50 opacity-[0.03]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%220.5%22/></svg>');"></div>
+
+    <slot />
+
+    <script is:inline>
+      // Theme toggle (event delegation)
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.theme-toggle');
+        if (!btn) return;
+        var current = window.__gardenTheme;
+        var next = (current === 'night') ? 'day' : 'night';
+        sessionStorage.setItem('garden-theme', next);
+        window.__applyTheme(next);
+      });
+
+      // Generate randomised clouds
+      (function() {
+        var track = document.querySelector('.cloud-track');
+        if (!track) return;
+
+        var ns = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('class', 'cloud-strip');
+        svg.setAttribute('viewBox', '0 0 2400 1000');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        svg.setAttribute('overflow', 'visible');
+        svg.style.opacity = 'var(--cloud-opacity)';
+
+        // Blur filters — wide filter region so blur isn't clipped
+        var defs = document.createElementNS(ns, 'defs');
+        var f1 = document.createElementNS(ns, 'filter');
+        f1.setAttribute('id', 'cBR1');
+        f1.setAttribute('x', '-50%');
+        f1.setAttribute('y', '-50%');
+        f1.setAttribute('width', '200%');
+        f1.setAttribute('height', '200%');
+        var b1 = document.createElementNS(ns, 'feGaussianBlur');
+        b1.setAttribute('stdDeviation', '14');
+        f1.appendChild(b1);
+        defs.appendChild(f1);
+
+        var f2 = document.createElementNS(ns, 'filter');
+        f2.setAttribute('id', 'cBR2');
+        f2.setAttribute('x', '-50%');
+        f2.setAttribute('y', '-50%');
+        f2.setAttribute('width', '200%');
+        f2.setAttribute('height', '200%');
+        var b2 = document.createElementNS(ns, 'feGaussianBlur');
+        b2.setAttribute('stdDeviation', '10');
+        f2.appendChild(b2);
+        defs.appendChild(f2);
+        svg.appendChild(defs);
+
+        var fills = ['#fff', '#f5f2ed', '#faf8f5'];
+        var filters = ['url(#cBR1)', 'url(#cBR2)'];
+        var count = 10 + Math.floor(Math.random() * 8);
+
+        for (var i = 0; i < count; i++) {
+          var cx = 50 + Math.random() * 1100;
+          var cy = 30 + Math.random() * 940;
+          var op = 0.4 + Math.random() * 0.3;
+          var flt = filters[Math.floor(Math.random() * 2)];
+          var size = 0.6 + Math.random() * 0.8;
+
+          var g = document.createElementNS(ns, 'g');
+          g.setAttribute('filter', flt);
+          g.setAttribute('opacity', String(op));
+
+          var ec = 2 + Math.floor(Math.random() * 2);
+          for (var j = 0; j < ec; j++) {
+            var e = document.createElementNS(ns, 'ellipse');
+            e.setAttribute('cx', String(cx + (Math.random() - 0.5) * 100 * size));
+            e.setAttribute('cy', String(cy + (Math.random() - 0.5) * 25));
+            e.setAttribute('rx', String((70 + Math.random() * 90) * size));
+            e.setAttribute('ry', String((28 + Math.random() * 32) * size));
+            e.setAttribute('fill', fills[Math.floor(Math.random() * 3)]);
+            g.appendChild(e);
+          }
+          svg.appendChild(g);
+
+          // Duplicate offset +1200 for seamless loop
+          var g2 = g.cloneNode(true);
+          var els = g2.querySelectorAll('ellipse');
+          for (var k = 0; k < els.length; k++) {
+            els[k].setAttribute('cx', String(parseFloat(els[k].getAttribute('cx')) + 1200));
+          }
+          svg.appendChild(g2);
+        }
+
+        track.appendChild(svg);
+      })();
+    </script>
+  </body>
+</html>

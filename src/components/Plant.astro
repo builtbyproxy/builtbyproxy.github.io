@@ -1,0 +1,408 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  stage: 'seeding' | 'sprouting' | 'growing' | 'grown';
+  url?: string;
+}
+
+const { name, description, stage, url } = Astro.props;
+
+const stageLabels = {
+  seeding: 'Seeding',
+  sprouting: 'Sprouting',
+  growing: 'Growing',
+  grown: 'In Full Bloom',
+};
+
+const stageColors = {
+  seeding: 'badge-warning',
+  sprouting: 'badge-info',
+  growing: 'badge-accent',
+  grown: 'badge-success',
+};
+---
+
+<div class="group card bg-base-100/80 backdrop-blur-sm shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-base-200/50 overflow-hidden">
+  <!-- Decorative top gradient bar -->
+  <div class={`h-1 w-full ${stage === 'grown' ? 'bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400' : stage === 'growing' ? 'bg-gradient-to-r from-pink-300 via-rose-300 to-pink-400' : stage === 'sprouting' ? 'bg-gradient-to-r from-emerald-300 via-green-400 to-teal-400' : 'bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-300'}`}></div>
+
+  <div class="card-body items-center text-center gap-3 pt-6">
+    <div class="mb-2 transition-transform duration-500 group-hover:scale-110">
+      {stage === 'seeding' && (
+        <svg viewBox="0 0 160 180" width="120" height="135" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="soilGradSeed" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#8B6914"/>
+              <stop offset="100%" stop-color="#5D4037"/>
+            </radialGradient>
+            <radialGradient id="seedGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFD54F" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#FFD54F" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="potSeed" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D2691E"/>
+              <stop offset="50%" stop-color="#A0522D"/>
+              <stop offset="100%" stop-color="#8B4513"/>
+            </linearGradient>
+          </defs>
+
+          {/* Terracotta pot */}
+          <path d="M 40 110 L 35 160 Q 35 170 45 170 L 115 170 Q 125 170 125 160 L 120 110 Z" fill="url(#potSeed)" stroke="#6D3A1F" stroke-width="1"/>
+          <ellipse cx="80" cy="110" rx="42" ry="8" fill="#D2691E"/>
+          <ellipse cx="80" cy="110" rx="38" ry="6" fill="url(#soilGradSeed)"/>
+          {/* Pot rim */}
+          <path d="M 37 108 Q 37 102 42 102 L 118 102 Q 123 102 123 108" fill="#D2691E" stroke="#6D3A1F" stroke-width="0.5"/>
+
+          {/* Soil texture */}
+          <circle cx="65" cy="108" r="2" fill="#6D4C41" opacity="0.5"/>
+          <circle cx="90" cy="106" r="1.5" fill="#5D4037" opacity="0.4"/>
+          <circle cx="75" cy="109" r="1" fill="#4E342E" opacity="0.3"/>
+          <circle cx="85" cy="110" r="1.8" fill="#6D4C41" opacity="0.3"/>
+
+          {/* Seed */}
+          <g transform="translate(80, 100) rotate(-15)">
+            <ellipse cx="0" cy="0" rx="9" ry="6" fill="#DEB887"/>
+            <ellipse cx="0" cy="0" rx="9" ry="6" fill="url(#seedGlow)"/>
+            <path d="M -7 -1 Q 0 -4 7 -1" stroke="#C8A96E" stroke-width="0.8" fill="none"/>
+            <ellipse cx="0" cy="0" rx="6" ry="3.5" fill="#E8D5B0" opacity="0.4"/>
+          </g>
+
+          {/* Tiny sprout crack */}
+          <path d="M 78 95 Q 76 88 79 82" stroke="#66BB6A" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <path d="M 79 84 Q 82 80 85 82" stroke="#81C784" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.6"/>
+
+          {/* Magical sparkles */}
+          <g>
+            <circle cx="60" cy="75" r="2" fill="#FFD700" opacity="0.7">
+              <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="2;2.5;2" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="70" r="1.5" fill="#FFF176" opacity="0.5">
+              <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="75" cy="65" r="1" fill="#FFD700" opacity="0.3">
+              <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.8s" repeatCount="indefinite"/>
+            </circle>
+            {/* Star sparkle */}
+            <g transform="translate(90, 60)" opacity="0.5">
+              <line x1="0" y1="-3" x2="0" y2="3" stroke="#FFD700" stroke-width="0.8" stroke-linecap="round">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+              </line>
+              <line x1="-3" y1="0" x2="3" y2="0" stroke="#FFD700" stroke-width="0.8" stroke-linecap="round">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+              </line>
+            </g>
+          </g>
+        </svg>
+      )}
+
+      {stage === 'sprouting' && (
+        <svg viewBox="0 0 160 180" width="120" height="135" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="soilGradSprout" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#8B6914"/>
+              <stop offset="100%" stop-color="#5D4037"/>
+            </radialGradient>
+            <linearGradient id="stemSprout" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#2E7D32"/>
+              <stop offset="100%" stop-color="#4CAF50"/>
+            </linearGradient>
+            <linearGradient id="leafSprout1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#66BB6A"/>
+              <stop offset="100%" stop-color="#388E3C"/>
+            </linearGradient>
+            <linearGradient id="leafSprout2" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#81C784"/>
+              <stop offset="100%" stop-color="#43A047"/>
+            </linearGradient>
+            <linearGradient id="potSprout" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D2691E"/>
+              <stop offset="50%" stop-color="#A0522D"/>
+              <stop offset="100%" stop-color="#8B4513"/>
+            </linearGradient>
+          </defs>
+
+          {/* Pot */}
+          <path d="M 40 115 L 35 165 Q 35 175 45 175 L 115 175 Q 125 175 125 165 L 120 115 Z" fill="url(#potSprout)" stroke="#6D3A1F" stroke-width="1"/>
+          <path d="M 37 113 Q 37 107 42 107 L 118 107 Q 123 107 123 113" fill="#D2691E" stroke="#6D3A1F" stroke-width="0.5"/>
+          <ellipse cx="80" cy="115" rx="42" ry="8" fill="#D2691E"/>
+          <ellipse cx="80" cy="115" rx="38" ry="6" fill="url(#soilGradSprout)"/>
+
+          {/* Soil bits */}
+          <circle cx="65" cy="113" r="2" fill="#6D4C41" opacity="0.5"/>
+          <circle cx="95" cy="112" r="1.5" fill="#5D4037" opacity="0.4"/>
+
+          {/* Main stem - organic curve */}
+          <path d="M 80 113 Q 77 95 75 80 Q 73 65 78 50" stroke="url(#stemSprout)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+          {/* Left leaf */}
+          <path d="M 75 78 Q 55 68 48 72 Q 52 62 75 72" fill="url(#leafSprout1)"/>
+          <path d="M 74 75 Q 60 68 52 70" stroke="#2E7D32" stroke-width="0.6" fill="none" opacity="0.5"/>
+
+          {/* Right leaf */}
+          <path d="M 77 62 Q 97 52 104 56 Q 100 46 77 56" fill="url(#leafSprout2)"/>
+          <path d="M 78 59 Q 92 53 100 54" stroke="#2E7D32" stroke-width="0.6" fill="none" opacity="0.5"/>
+
+          {/* Top bud */}
+          <path d="M 78 50 Q 74 42 78 36 Q 82 42 78 50" fill="#A5D6A7"/>
+          <path d="M 78 48 Q 82 40 78 34" stroke="#66BB6A" stroke-width="0.5" fill="none"/>
+
+          {/* Dew drops */}
+          <circle cx="55" cy="70" r="2" fill="white" opacity="0.5"/>
+          <circle cx="55" cy="70" r="1" fill="white" opacity="0.8"/>
+          <circle cx="96" cy="53" r="1.5" fill="white" opacity="0.4"/>
+          <circle cx="96" cy="53" r="0.7" fill="white" opacity="0.7"/>
+
+          {/* Gentle sway */}
+          <animateTransform attributeName="transform" type="rotate" values="-0.5 80 115;0.5 80 115;-0.5 80 115" dur="4s" repeatCount="indefinite"/>
+        </svg>
+      )}
+
+      {stage === 'growing' && (
+        <svg viewBox="0 0 160 180" width="120" height="135" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="soilGradGrow" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#8B6914"/>
+              <stop offset="100%" stop-color="#5D4037"/>
+            </radialGradient>
+            <linearGradient id="stemGrow" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#1B5E20"/>
+              <stop offset="100%" stop-color="#4CAF50"/>
+            </linearGradient>
+            <radialGradient id="flowerPinkCenter" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FCE4EC"/>
+              <stop offset="100%" stop-color="#F48FB1"/>
+            </radialGradient>
+            <radialGradient id="flowerPinkPetal" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#F8BBD0"/>
+              <stop offset="100%" stop-color="#EC407A"/>
+            </radialGradient>
+            <linearGradient id="potGrow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D2691E"/>
+              <stop offset="50%" stop-color="#A0522D"/>
+              <stop offset="100%" stop-color="#8B4513"/>
+            </linearGradient>
+          </defs>
+
+          {/* Pot */}
+          <path d="M 40 120 L 35 168 Q 35 178 45 178 L 115 178 Q 125 178 125 168 L 120 120 Z" fill="url(#potGrow)" stroke="#6D3A1F" stroke-width="1"/>
+          <path d="M 37 118 Q 37 112 42 112 L 118 112 Q 123 112 123 118" fill="#D2691E" stroke="#6D3A1F" stroke-width="0.5"/>
+          <ellipse cx="80" cy="120" rx="42" ry="8" fill="#D2691E"/>
+          <ellipse cx="80" cy="120" rx="38" ry="6" fill="url(#soilGradGrow)"/>
+
+          {/* Main stem */}
+          <path d="M 80 118 Q 76 95 74 75 Q 72 55 78 35 Q 80 28 82 25" stroke="url(#stemGrow)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+
+          {/* Branch stems */}
+          <path d="M 76 90 Q 60 82 50 85" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M 75 70 Q 95 60 105 63" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          {/* Large leaves with veins */}
+          <path d="M 76 88 Q 48 75 42 82 Q 38 72 52 68 Q 66 65 76 80" fill="#4CAF50"/>
+          <path d="M 75 84 Q 55 74 46 78" stroke="#2E7D32" stroke-width="0.5" fill="none" opacity="0.6"/>
+          <path d="M 72 80 Q 58 72 50 76" stroke="#388E3C" stroke-width="0.4" fill="none" opacity="0.4"/>
+
+          <path d="M 77 68 Q 105 55 112 62 Q 116 52 100 48 Q 84 45 77 60" fill="#66BB6A"/>
+          <path d="M 78 64 Q 100 54 108 58" stroke="#2E7D32" stroke-width="0.5" fill="none" opacity="0.6"/>
+          <path d="M 80 60 Q 96 52 104 55" stroke="#388E3C" stroke-width="0.4" fill="none" opacity="0.4"/>
+
+          {/* Upper small leaves */}
+          <path d="M 76 52 Q 58 42 52 48 Q 60 38 76 46" fill="#81C784"/>
+          <path d="M 80 42 Q 96 34 100 38 Q 92 30 80 36" fill="#A5D6A7"/>
+
+          {/* Flower (partially open) */}
+          <g transform="translate(82, 22)">
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#flowerPinkPetal)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="#F48FB1" transform="rotate(72)" opacity="0.9"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#flowerPinkPetal)" transform="rotate(144)" opacity="0.85"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="#F48FB1" transform="rotate(216)" opacity="0.9"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="8" fill="url(#flowerPinkPetal)" transform="rotate(288)" opacity="0.85"/>
+            <circle cx="0" cy="0" r="4" fill="url(#flowerPinkCenter)"/>
+            <circle cx="0" cy="0" r="2" fill="#FFD54F"/>
+          </g>
+
+          {/* Dew drops */}
+          <circle cx="48" cy="78" r="2" fill="white" opacity="0.5"/>
+          <circle cx="48" cy="78" r="1" fill="white" opacity="0.8"/>
+          <circle cx="106" cy="58" r="1.8" fill="white" opacity="0.4"/>
+
+          {/* Gentle sway */}
+          <animateTransform attributeName="transform" type="rotate" values="-1 80 120;1 80 120;-1 80 120" dur="3.5s" repeatCount="indefinite"/>
+        </svg>
+      )}
+
+      {stage === 'grown' && (
+        <svg viewBox="0 0 180 200" width="135" height="150" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="soilGradFull" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#8B6914"/>
+              <stop offset="100%" stop-color="#5D4037"/>
+            </radialGradient>
+            <linearGradient id="stemFull" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#1B5E20"/>
+              <stop offset="50%" stop-color="#2E7D32"/>
+              <stop offset="100%" stop-color="#388E3C"/>
+            </linearGradient>
+            <radialGradient id="petalRed" cx="40%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#EF5350"/>
+              <stop offset="100%" stop-color="#C62828"/>
+            </radialGradient>
+            <radialGradient id="petalOrange" cx="40%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#FF7043"/>
+              <stop offset="100%" stop-color="#D84315"/>
+            </radialGradient>
+            <radialGradient id="petalPink" cx="40%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#EC407A"/>
+              <stop offset="100%" stop-color="#AD1457"/>
+            </radialGradient>
+            <radialGradient id="petalPurple" cx="40%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#AB47BC"/>
+              <stop offset="100%" stop-color="#6A1B9A"/>
+            </radialGradient>
+            <radialGradient id="flowerCenter" cx="40%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="#FFF9C4"/>
+              <stop offset="100%" stop-color="#FFD54F"/>
+            </radialGradient>
+            <radialGradient id="glowFull" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFD54F" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#FFD54F" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="potFull" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D2691E"/>
+              <stop offset="50%" stop-color="#A0522D"/>
+              <stop offset="100%" stop-color="#8B4513"/>
+            </linearGradient>
+          </defs>
+
+          {/* Glow behind flower */}
+          <circle cx="90" cy="35" r="35" fill="url(#glowFull)">
+            <animate attributeName="r" values="35;40;35" dur="3s" repeatCount="indefinite"/>
+          </circle>
+
+          {/* Pot */}
+          <path d="M 48 135 L 42 183 Q 42 193 52 193 L 128 193 Q 138 193 138 183 L 132 135 Z" fill="url(#potFull)" stroke="#6D3A1F" stroke-width="1"/>
+          <path d="M 45 133 Q 45 127 50 127 L 130 127 Q 135 127 135 133" fill="#D2691E" stroke="#6D3A1F" stroke-width="0.5"/>
+          <ellipse cx="90" cy="135" rx="44" ry="8" fill="#D2691E"/>
+          <ellipse cx="90" cy="135" rx="40" ry="6" fill="url(#soilGradFull)"/>
+
+          {/* Small decorative moss on soil */}
+          <circle cx="70" cy="133" r="3" fill="#81C784" opacity="0.5"/>
+          <circle cx="108" cy="132" r="2.5" fill="#A5D6A7" opacity="0.4"/>
+          <circle cx="85" cy="134" r="2" fill="#66BB6A" opacity="0.3"/>
+
+          {/* Main stem with thickness variation */}
+          <path d="M 90 133 Q 86 110 84 90 Q 82 70 86 50 Q 88 40 90 32" stroke="url(#stemFull)" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <path d="M 90 133 Q 86 110 84 90 Q 82 70 86 50 Q 88 40 90 32" stroke="#4CAF50" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+          {/* Branch stems */}
+          <path d="M 86 105 Q 62 92 48 98" stroke="#2E7D32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M 84 82 Q 108 68 122 74" stroke="#2E7D32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M 86 62 Q 64 50 52 56" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M 88 48 Q 108 38 116 42" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          {/* Lush leaves with veins and highlights */}
+          {/* Bottom left */}
+          <path d="M 84 103 Q 48 85 38 96 Q 32 82 50 74 Q 68 68 84 92" fill="#4CAF50"/>
+          <path d="M 82 97 Q 55 82 42 90" stroke="#2E7D32" stroke-width="0.6" fill="none" opacity="0.5"/>
+          <path d="M 78 92 Q 58 80 48 86" stroke="#388E3C" stroke-width="0.4" fill="none" opacity="0.3"/>
+          <path d="M 70 85 Q 55 80 48 84" stroke="#388E3C" stroke-width="0.3" fill="none" opacity="0.2"/>
+
+          {/* Middle right */}
+          <path d="M 86 80 Q 120 62 130 72 Q 136 58 115 50 Q 94 44 86 68" fill="#66BB6A"/>
+          <path d="M 88 74 Q 114 60 126 66" stroke="#2E7D32" stroke-width="0.6" fill="none" opacity="0.5"/>
+          <path d="M 90 68 Q 110 56 122 60" stroke="#388E3C" stroke-width="0.4" fill="none" opacity="0.3"/>
+
+          {/* Upper left */}
+          <path d="M 85 60 Q 56 44 46 54 Q 42 42 58 36 Q 74 32 85 50" fill="#81C784"/>
+          <path d="M 84 55 Q 62 44 50 50" stroke="#4CAF50" stroke-width="0.5" fill="none" opacity="0.4"/>
+
+          {/* Upper right */}
+          <path d="M 89 46 Q 112 34 118 40 Q 114 30 100 28 Q 89 27 89 40" fill="#A5D6A7"/>
+
+          {/* Main flower - layered petals */}
+          <g transform="translate(90, 28)">
+            {/* Outer petals */}
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalRed)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalOrange)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalPink)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalPurple)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalRed)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalOrange)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalPink)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="13" fill="url(#petalPurple)" transform="rotate(315)"/>
+
+            {/* Inner petals */}
+            <ellipse cx="0" cy="-8" rx="5" ry="9" fill="#FF8A80" transform="rotate(22)" opacity="0.8"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="9" fill="#F48FB1" transform="rotate(94)" opacity="0.8"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="9" fill="#FF8A65" transform="rotate(166)" opacity="0.8"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="9" fill="#CE93D8" transform="rotate(238)" opacity="0.8"/>
+            <ellipse cx="0" cy="-8" rx="5" ry="9" fill="#EF9A9A" transform="rotate(310)" opacity="0.8"/>
+
+            {/* Center */}
+            <circle cx="0" cy="0" r="6" fill="url(#flowerCenter)"/>
+            <circle cx="-1.5" cy="-1.5" r="1" fill="#FFB300" opacity="0.6"/>
+            <circle cx="1.5" cy="0.5" r="0.8" fill="#FFB300" opacity="0.5"/>
+            <circle cx="-0.5" cy="1.5" r="0.7" fill="#FFB300" opacity="0.4"/>
+          </g>
+
+          {/* Sparkle particles */}
+          <g>
+            <circle cx="55" cy="35" r="2" fill="#FFD700" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.1;0.8" dur="1.5s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="35;32;35" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="125" cy="30" r="1.5" fill="#FFD700" opacity="0.6">
+              <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="30;27;30" dur="3.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="70" cy="18" r="1.2" fill="#FFF176" opacity="0.5">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="112" cy="15" r="1" fill="#FFD700" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.2s" repeatCount="indefinite"/>
+            </circle>
+
+            {/* Star sparkles */}
+            <g transform="translate(45, 25)" opacity="0.6">
+              <line x1="0" y1="-3" x2="0" y2="3" stroke="#FFD700" stroke-width="1" stroke-linecap="round">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="1.2s" repeatCount="indefinite"/>
+              </line>
+              <line x1="-3" y1="0" x2="3" y2="0" stroke="#FFD700" stroke-width="1" stroke-linecap="round">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="1.2s" repeatCount="indefinite"/>
+              </line>
+            </g>
+            <g transform="translate(135, 22)" opacity="0.4">
+              <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="#FFF176" stroke-width="0.8" stroke-linecap="round">
+                <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.6s" repeatCount="indefinite"/>
+              </line>
+              <line x1="-2.5" y1="0" x2="2.5" y2="0" stroke="#FFF176" stroke-width="0.8" stroke-linecap="round">
+                <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.6s" repeatCount="indefinite"/>
+              </line>
+            </g>
+          </g>
+
+          {/* Gentle sway */}
+          <animateTransform attributeName="transform" type="rotate" values="-1 90 135;1 90 135;-1 90 135" dur="3s" repeatCount="indefinite"/>
+        </svg>
+      )}
+    </div>
+
+    <h3 class="card-title text-lg font-semibold">{name}</h3>
+    <p class="text-sm text-base-content/60 leading-relaxed">{description}</p>
+    <div class={`badge ${stageColors[stage]} badge-sm gap-1`}>
+      {stage === 'seeding' && <span class="text-xs">&#x1F331;</span>}
+      {stage === 'sprouting' && <span class="text-xs">&#x1F33F;</span>}
+      {stage === 'growing' && <span class="text-xs">&#x1F33A;</span>}
+      {stage === 'grown' && <span class="text-xs">&#x1F338;</span>}
+      {stageLabels[stage]}
+    </div>
+
+    {url && (
+      <a href={url} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm mt-2 gap-1">
+        Visit Project
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    )}
+  </div>
+</div>

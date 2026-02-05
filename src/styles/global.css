@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: garden --default;
+}
+
+/* Day/Night CSS custom properties -set by JS */
+:root {
+  --sky-color-top: #e8e4dc;
+  --sky-color-bottom: #f0ede8;
+  --cloud-opacity: 0.9;
+  --hill-far-color: #8a9a7c;
+  --hill-mid-color: #7d9470;
+  --grass-color: #7a9668;
+  --text-color: #302820;
+  --text-muted: #5a524a;
+  --text-accent: #3a6a30;
+  --surface-bg: rgba(250, 247, 240, 0.75);
+  --surface-bg-solid: rgba(250, 247, 240, 0.88);
+  --surface-border: rgba(180, 170, 155, 0.25);
+  --overlay-opacity: 0;
+  --body-bg: #f0ede8;
+}
+
+/* Firefly float */
+@keyframes fireflyFloat {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.8; }
+  50% { transform: translate(15px, -20px); opacity: 0.6; }
+  90% { opacity: 0.2; }
+}
+
+/* Star twinkle */
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.9; }
+}
+
+/* Drifting clouds */
+.cloud-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  animation: cloudDrift 80s linear infinite;
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Plant link interactive styles */
+.plant-link {
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.plant-label {
+  fill: var(--text-color);
+}
+
+.plant-link:hover .plant-label {
+  opacity: 1 !important;
+}
+
+/* Night mode overlay — use element opacity so it can transition smoothly */
+.night-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  background: radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(15, 23, 42, 0.45) 100%);
+  opacity: var(--overlay-opacity);
+}
+
+/* Night element containers — always present, faded by CSS */
+#starsContainer,
+#firefliesContainer {
+  opacity: 0;
+}
+html[data-time="night"] #starsContainer,
+html[data-time="night"] #firefliesContainer {
+  opacity: 1;
+}
+
+/* Firefly */
+.firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fef08a;
+  box-shadow: 0 0 6px 2px rgba(254, 240, 138, 0.6);
+  animation: fireflyFloat 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Star */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  animation: starTwinkle 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  transition: transform 0.2s ease, background 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: var(--surface-bg-solid);
+}
+
+/* Fixed position variant for homepage */
+.theme-toggle-fixed {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 40;
+}
+
+/* Show sun icon at night (click to go to day) */
+html[data-time="night"] .theme-icon-sun { display: block; }
+html[data-time="night"] .theme-icon-moon { display: none; }
+
+/* Show moon icon during day (click to go to night) */
+html:not([data-time="night"]) .theme-icon-sun { display: none; }
+html:not([data-time="night"]) .theme-icon-moon { display: block; }
