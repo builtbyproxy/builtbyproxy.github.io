@@ -31,6 +31,16 @@ export const projects: Project[] = [
       'Techmas is an annual Christmas party that brings together Brisbane\'s tech community to celebrate the end of the year. It\'s a night of networking, fun, and festive vibes for developers, designers, founders, and everyone in between.',
   },
   {
+    slug: 'jellyfin-plugin-letterboxd',
+    name: 'Letterboxd Sync',
+    description:
+      'A Jellyfin plugin that automatically logs watched films to your Letterboxd diary.',
+    stage: 'growing',
+    url: 'https://lachlanyoung.dev/jellyfin-plugin-letterboxd/',
+    details:
+      'LetterboxdSync bridges your Jellyfin media server with Letterboxd, syncing watch history, ratings, favorites, and reviews automatically as films finish playing. It maps Jellyfin\'s 0-10 rating scale to Letterboxd\'s 0.5-5 star system, posts reviews written in Jellyfin to your Letterboxd diary, and supports multiple users with their own linked accounts. Built for home server setups, it includes resilience against Cloudflare blocking via API and scraping fallbacks, plus automatic authentication recovery and a daily scheduled catch-up for missed entries.',
+  },
+  {
     slug: 'rubyhash',
     name: 'Rubyhash',
     description:

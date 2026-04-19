@@ -180,6 +180,7 @@ const stageEmoji: Record<string, string> = {
         {/* Christmas red & green theme                */}
         {/* ============================================ */}
         <a href={`/projects/${projects[1].slug}`} class="plant-link">
+         <g transform="translate(-75, 0)">
           {/* Invisible hit area */}
           <rect x="325" y="175" width="155" height="290" fill="transparent"/>
           <g class="plant-group">
@@ -249,13 +250,82 @@ const stageEmoji: Record<string, string> = {
           </g>
 
           <text x="400" y="455" text-anchor="middle" fill="#5a5045" font-size="18" font-weight="600" font-family="'Caveat', cursive" class="plant-label" opacity="0.8">Techmas</text>
+         </g>
         </a>
 
         {/* ============================================ */}
-        {/* PLANT 3: Rubyhash -Sprouting                */}
-        {/* Deep ruby red gem tones                     */}
+        {/* PLANT 3: Letterboxd Sync -Growing           */}
+        {/* Letterboxd tri-color (orange/green/blue)    */}
         {/* ============================================ */}
         <a href={`/projects/${projects[2].slug}`} class="plant-link">
+         <g transform="translate(-35, 0)">
+          {/* Invisible hit area */}
+          <rect x="485" y="215" width="100" height="250" fill="transparent"/>
+          <g class="plant-group">
+            {/* Stem -muted green */}
+            <g filter="url(#sketchLine)">
+              <path d="M 535 420 Q 532 390 530 355 Q 527 320 532 285 Q 535 260 537 242" stroke="#4a6b4a" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <path d="M 536 420 Q 534 392 532 358 Q 529 322 534 288 Q 537 263 539 245" stroke="#3a5a3a" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.3"/>
+            </g>
+
+            {/* Branch lines */}
+            <g filter="url(#sketchLine)" opacity="0.5">
+              <path d="M 531 340 Q 508 325 495 332" stroke="#4a6b4a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M 530 295 Q 555 280 568 288" stroke="#4a6b4a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </g>
+
+            {/* Leaves */}
+            <g filter="url(#watercolorFill)">
+              <path d="M 530 338 Q 500 320 489 332 Q 485 315 504 308 Q 522 305 532 325" fill="#6a9060" opacity="0.45"/>
+              <path d="M 532 293 Q 562 275 575 286 Q 578 270 558 264 Q 540 262 534 280" fill="#7aa070" opacity="0.4"/>
+            </g>
+
+            {/* Leaf vein sketch lines */}
+            <g filter="url(#sketchLine)" opacity="0.22">
+              <path d="M 528 328 Q 502 320 491 328" stroke="#3a5a3a" stroke-width="0.5" fill="none"/>
+              <path d="M 532 286 Q 556 275 568 282" stroke="#3a5a3a" stroke-width="0.5" fill="none"/>
+            </g>
+
+            {/* Flower -Letterboxd tri-color trefoil */}
+            <g filter="url(#watercolorFill)" class="plant-flower">
+              <g transform="translate(537, 235)">
+                {/* Three large petals in Letterboxd brand colors */}
+                <ellipse cx="0" cy="-14" rx="9" ry="16" fill="#FF8000" opacity="0.55" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-14" rx="9" ry="16" fill="#00E054" opacity="0.5" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-14" rx="9" ry="16" fill="#40BCF4" opacity="0.5" transform="rotate(240)"/>
+                {/* Inner softening petals */}
+                <ellipse cx="0" cy="-10" rx="5" ry="11" fill="#FFA040" opacity="0.3" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="11" fill="#60E888" opacity="0.3" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="11" fill="#70CCF8" opacity="0.3" transform="rotate(300)"/>
+                {/* Center -film reel dark */}
+                <circle cx="0" cy="0" r="6" fill="#2a2e35" opacity="0.6"/>
+                <circle cx="0" cy="0" r="3.5" fill="#1a1e25" opacity="0.5"/>
+                <circle cx="-1" cy="-1" r="1" fill="#5a6070" opacity="0.4"/>
+              </g>
+            </g>
+
+            {/* Flower ink outline */}
+            <g filter="url(#sketchLine)" opacity="0.28">
+              <g transform="translate(537, 235)">
+                <circle cx="0" cy="0" r="18" stroke="#3a4a55" stroke-width="0.7" fill="none"/>
+                <circle cx="0" cy="0" r="6" stroke="#2a2e35" stroke-width="0.4" fill="none"/>
+              </g>
+            </g>
+
+            <animateTransform attributeName="transform" type="rotate" values="-1.8 535 420;1.8 535 420;-1.8 535 420" dur="4.8s" repeatCount="indefinite"/>
+          </g>
+
+          <text x="535" y="455" text-anchor="middle" fill="#5a5045" font-size="16" font-weight="600" font-family="'Caveat', cursive" class="plant-label" opacity="0.8">Letterboxd</text>
+          <text x="535" y="472" text-anchor="middle" fill="#5a5045" font-size="16" font-weight="600" font-family="'Caveat', cursive" class="plant-label" opacity="0.8">Sync</text>
+         </g>
+        </a>
+
+        {/* ============================================ */}
+        {/* PLANT 4: Rubyhash -Sprouting                */}
+        {/* Deep ruby red gem tones                     */}
+        {/* ============================================ */}
+        <a href={`/projects/${projects[3].slug}`} class="plant-link">
+         <g transform="translate(35, 0)">
           {/* Invisible hit area */}
           <rect x="590" y="290" width="100" height="175" fill="transparent"/>
           <g class="plant-group">
@@ -289,13 +359,14 @@ const stageEmoji: Record<string, string> = {
           </g>
 
           <text x="640" y="455" text-anchor="middle" fill="#5a5045" font-size="18" font-weight="600" font-family="'Caveat', cursive" class="plant-label" opacity="0.8">Rubyhash</text>
+         </g>
         </a>
 
         {/* ============================================ */}
-        {/* PLANT 4: Pokepath -Seeding                  */}
+        {/* PLANT 5: Pokepath -Seeding                  */}
         {/* Golden yellow/electric theme                */}
         {/* ============================================ */}
-        <a href={`/projects/${projects[3].slug}`} class="plant-link">
+        <a href={`/projects/${projects[4].slug}`} class="plant-link">
           {/* Invisible hit area */}
           <rect x="810" y="340" width="80" height="140" fill="transparent"/>
           <g class="plant-group">
