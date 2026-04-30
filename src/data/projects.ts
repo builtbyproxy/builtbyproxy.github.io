@@ -41,6 +41,17 @@ export const projects: Project[] = [
       'LetterboxdSync bridges your Jellyfin media server with Letterboxd, syncing watch history, ratings, favorites, and reviews automatically as films finish playing. It maps Jellyfin\'s 0-10 rating scale to Letterboxd\'s 0.5-5 star system, posts reviews written in Jellyfin to your Letterboxd diary, and supports multiple users with their own linked accounts. Built for home server setups, it includes resilience against Cloudflare blocking via API and scraping fallbacks, plus automatic authentication recovery and a daily scheduled catch-up for missed entries.',
   },
   {
+    slug: 'buds',
+    name: 'Buds',
+    description:
+      'A relationship management app for introverts. Stay close to the people you care about, gently.',
+    stage: 'growing',
+    url: 'https://buds.garden/',
+    icon: '\u{1F33C}',
+    details:
+      'Buds helps you nurture relationships at your own pace. Pot the people you care about, set custom contact cadences (weekly for close friends, quarterly for distant ones), and get quiet reminders only when someone needs attention. Mark VIPs for enhanced treatment, track birthdays and anniversaries, and jot notes about meaningful moments. No streaks, no scores, no gamification, just a calm way to keep important relationships from drifting apart.',
+  },
+  {
     slug: 'rubyhash',
     name: 'Rubyhash',
     description:
